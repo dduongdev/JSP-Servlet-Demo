@@ -1,5 +1,7 @@
 package com.dduongdev.services;
 
+import java.util.Optional;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.dduongdev.daos.MySqlUserDao;
@@ -21,5 +23,14 @@ public class AuthServiceImpl implements AuthService {
 		
 		userDao.save(new User(username, password));
 	}
+
+	@Override
+    public Optional<User> login(String username, String password) {
+        return userDao.findAll()
+            .stream()
+            .filter(user -> user.getUsername().equals(username))
+            .filter(user -> BCrypt.checkpw(password, user.getPassword()))
+            .findFirst();
+    }
 
 }

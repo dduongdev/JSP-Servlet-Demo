@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.dduongdev.entities.User;
@@ -62,4 +64,23 @@ public class MySqlUserDao implements UserDao {
 		return new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"),
 				rs.getTimestamp("created_at").toLocalDateTime());
 	}
+	
+	@Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
+        String query = MySqlCommands.USER_FIND_ALL_QUERY;
+
+        try (Connection connection = DbConnector.getInstance().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                users.add(mapFrom(rs));
+            }
+        } catch (SQLException e) {
+        	throw new RuntimeException(e);
+        }
+
+        return users;
+    }
 }

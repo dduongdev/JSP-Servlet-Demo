@@ -8,4 +8,5 @@ import com.dduongdev.entities.User;
 public interface UserDao {
 	Optional<User> findByUsername(String username);
 	void save(User user);
+	List<User> findAll();
 }

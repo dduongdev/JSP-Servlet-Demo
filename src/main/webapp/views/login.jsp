@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup | MyApp</title>
+    <title>Login | MyApp</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -35,8 +35,8 @@
 </head>
 <body>
     <div class="signup-container">
-        <h3>Sign Up for MyApp</h3>
-        <form id="signupForm" action="${pageContext.request.contextPath}/register" method="post">
+        <h3>Log In for MyApp</h3>
+        <form id="signupForm" action="${pageContext.request.contextPath}/login" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
@@ -48,10 +48,10 @@
             <button type="submit" class="btn btn-primary w-100">Sign Up</button>
             <% String message = (String) request.getAttribute("ResponseMessage"); %>
 			<% if (message != null) { %>
-			    <p style="color: red;"><%= message %></p>
+			    <p style="color: green;"><%= message %></p>
 			<% } %>
         </form>
-        <p class="text-center mt-3">Already have an account? <a href="${pageContext.request.contextPath}/login">Login here</a></p>
+        <p class="text-center mt-3">Don't have an account? <a href="${pageContext.request.contextPath}/register">Register here</a></p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
